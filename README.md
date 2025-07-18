@@ -1,3 +1,7 @@
+This fork uses the bit32 library for Lua 5.2 and bitwise operators for Lua 5.3.
+
+---
+
 # Lua_AES
 
 This is an AES implementation in pure Lua version 5.1. It has also been tested with LuaJIT. Currently only 256-bit keys encryption keys are supported along with the ECB block cypher mode. I made this for my personal use but have made it public under the Apache v2 license if you would like to use it. If you review the code, feel free to give me some feedback. If you find a bug, would like a feature, or have a question please file an issue.

@@ -1,3 +1,6 @@
+-- Modified by WNC 18.07.2025
+-- Added different implementations for Lua 5.1, 5.2, >=5.3
+
 --[[
 	Copyright 2019 Tyler Richard Hoyer
 
@@ -204,11 +207,20 @@ local xor4 = {
 	15,14,13,12,11,10,9,8,7,6,5,4,3,2,1,0,
 }
 
-local function xor8(a, b)
-	local al = a % 16
-	local bl = b % 16
-	return 16 * xor4[a - al + (b - bl) / 16] + xor4[16 * al + bl]
+local xor8
+if not loadstring and load 'return 1 ~ 2' then  -- 5.3 bitwise operators
+	xor8 = load 'return function (a, b) return a ~ b end'()
+elseif bit32 then                               -- 5.2 bit32 library
+	xor8 = bit32.bxor
+else                                            -- 5.1 lookup table
+	xor8 = function(a, b)
+		local al = a % 16
+		local bl = b % 16
+		return 16 * xor4[a - al + (b - bl) / 16] + xor4[16 * al + bl]
+	end
 end
+
+local unpack = unpack or table.unpack
 
 local function addRoundKey(state, key)
 	for i, byte in next, state do
