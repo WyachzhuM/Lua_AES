@@ -289,10 +289,10 @@ local function schedule256(key)
 
 	local i = 1
 	local c = n
-	local t1 = expanded[1]
-	local t2 = expanded[2]
-	local t3 = expanded[3]
-	local t4 = expanded[4]
+	local t1 = expanded[0]
+	local t2 = expanded[1]
+	local t3 = expanded[2]
+	local t4 = expanded[3]
 	while c < b do
 		t1, t2, t3, t4 = xor8(rcon[i], s[t2]), s[t3], s[t4], s[t1]
 		i = i + 1
